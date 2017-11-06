@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="task_name" Type="Int32" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="teacher_id" Type="Int32" />
+    <Property Name="task_schedule_id" Type="Int32" />
+    <NavigationProperty Name="Task_Schedule" Relationship="Self.FK_Task_Task_Schedule" FromRole="Task" ToRole="Task_Schedule" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK_Task_Teacher" FromRole="Task" ToRole="Teacher" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Task_User" FromRole="Task" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Task_Schedule">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="start_date" Type="Int64" />
+    <Property Name="end_date" Type="Int64" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Task_Schedule" FromRole="Task_Schedule" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="Int64" />
+    <Property Name="email" Type="Int64" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Teacher" FromRole="Teacher" ToRole="Task" />
+    <NavigationProperty Name="User_teacher" Relationship="Self.FK_User_teacher_Teacher" FromRole="Teacher" ToRole="User_teacher" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="Int64" />
+    <Property Name="mail" Type="Int64" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_User" FromRole="User" ToRole="Task" />
+    <NavigationProperty Name="User_teacher" Relationship="Self.FK_User_teacher_User_teacher" FromRole="User" ToRole="User_teacher" />
+  </EntityType>
+  <EntityType Name="User_teacher">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="teacher_id" Type="Int32" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK_User_teacher_Teacher" FromRole="User_teacher" ToRole="Teacher" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_teacher_User_teacher" FromRole="User_teacher" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Task_Task_Schedule">
+    <End Role="Task_Schedule" Type="Self.Task_Schedule" Multiplicity="0..1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task_Schedule">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="task_schedule_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="teacher_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_teacher_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="User_teacher" Type="Self.User_teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User_teacher">
+        <PropertyRef Name="teacher_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_teacher_User_teacher">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="User_teacher" Type="Self.User_teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User_teacher">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Tasks" EntityType="Self.Task" />
+    <EntitySet Name="Task_Schedule" EntityType="Self.Task_Schedule" />
+    <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="User_teacher" EntityType="Self.User_teacher" />
+    <AssociationSet Name="FK_Task_Task_Schedule" Association="Self.FK_Task_Task_Schedule">
+      <End Role="Task_Schedule" EntitySet="Task_Schedule" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_Teacher" Association="Self.FK_Task_Teacher">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_User" Association="Self.FK_Task_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_teacher_Teacher" Association="Self.FK_User_teacher_Teacher">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="User_teacher" EntitySet="User_teacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_teacher_User_teacher" Association="Self.FK_User_teacher_User_teacher">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User_teacher" EntitySet="User_teacher" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

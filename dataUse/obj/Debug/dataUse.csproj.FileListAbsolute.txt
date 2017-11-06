@@ -1,0 +1,15 @@
+C:\Users\User\source\repos\dataUse\dataUse\obj\Debug\dataUse.csprojResolveAssemblyReference.cache
+C:\Users\User\source\repos\dataUse\dataUse\obj\Debug\dataUse.Login.resources
+C:\Users\User\source\repos\dataUse\dataUse\obj\Debug\dataUse.Properties.Resources.resources
+C:\Users\User\source\repos\dataUse\dataUse\obj\Debug\dataUse.csproj.GenerateResource.Cache
+C:\Users\User\source\repos\dataUse\dataUse\obj\Debug\dataUse.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\dataUse\dataUse\bin\Debug\dataUse.exe.config
+C:\Users\User\source\repos\dataUse\dataUse\bin\Debug\dataUse.exe
+C:\Users\User\source\repos\dataUse\dataUse\bin\Debug\dataUse.pdb
+C:\Users\User\source\repos\dataUse\dataUse\bin\Debug\EntityFramework.dll
+C:\Users\User\source\repos\dataUse\dataUse\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\User\source\repos\dataUse\dataUse\bin\Debug\EntityFramework.xml
+C:\Users\User\source\repos\dataUse\dataUse\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\User\source\repos\dataUse\dataUse\obj\Debug\dataUse.exe
+C:\Users\User\source\repos\dataUse\dataUse\obj\Debug\dataUse.pdb
+C:\Users\User\source\repos\dataUse\dataUse\obj\Debug\dataUse.Information.resources
